@@ -1,0 +1,9 @@
+{
+    "station_conf": {
+        "network_name": "Junk",
+        "network_type": "loop",
+        "channel_number": 6,
+        "network_long_name": "My Junk Channel",
+        "content_dir": "catalog/junk"
+    }
+}

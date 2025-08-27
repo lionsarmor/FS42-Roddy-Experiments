@@ -1,0 +1,9 @@
+{
+    "station_conf": {
+        "network_name": "MusicBox",
+        "network_type": "loop",
+        "channel_number": 7,
+        "network_long_name": "My MusicBox Channel",
+        "content_dir": "catalog/musicbox"
+    }
+}

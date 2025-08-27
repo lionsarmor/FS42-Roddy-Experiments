@@ -1,0 +1,15 @@
+{
+  "name": "kiosk-launcher",
+  "version": "1.0.0",
+  "description": "FieldStation boot menu",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "dan",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^37.2.6",
+    "express": "^5.1.0"
+  }
+}

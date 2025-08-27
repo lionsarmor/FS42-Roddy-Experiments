@@ -1,0 +1,9 @@
+{
+    "station_conf": {
+        "network_name": "ShortsTV",
+        "network_type": "loop",
+        "channel_number": 8,
+        "network_long_name": "My ShortsTV Channel",
+        "content_dir": "catalog/shortstv"
+    }
+}

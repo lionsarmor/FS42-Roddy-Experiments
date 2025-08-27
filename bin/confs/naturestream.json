@@ -1,0 +1,16 @@
+{
+    "station_conf": {
+        "network_name": "NatureStream",
+        "network_type": "streaming",
+        "channel_number": 2,
+        "network_long_name": "My NatureStream Channel",
+        "runtime_dir": "runtime/naturestream",
+        "streams": [
+            {
+                "url": "https://ireplay.tv/test/blender.m3u8",
+                "duration": 30,
+                "title": "NatureStream"
+            }
+        ]
+    }
+}

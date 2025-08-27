@@ -1,0 +1,4 @@
+replace:
+
+
+~/.config/mpv/mpv.conf

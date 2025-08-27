@@ -1,0 +1,9 @@
+{
+    "station_conf": {
+        "network_name": "CartoonLoops",
+        "network_type": "loop",
+        "channel_number": 9,
+        "network_long_name": "My CartoonLoops Channel",
+        "content_dir": "catalog/cartoonloops"
+    }
+}

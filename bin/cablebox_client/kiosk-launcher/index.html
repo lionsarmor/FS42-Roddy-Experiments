@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FieldStation Boot Menu</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Share Tech Mono', monospace;
+      background: linear-gradient(to bottom, #000000, #111111);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 40px;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+      letter-spacing: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      width: 80%;
+      max-width: 1000px;
+    }
+
+    .tile {
+      background: #222;
+      border: 2px solid #00ffcc;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffcc88;
+    }
+
+    .tile:hover {
+      background: #00ffcc;
+      color: #000;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>🛰 FIELDSTATION 42</h1>
+  <div class="grid">
+    <div class="tile" onclick="launch('cable')">📺 Cable</div>
+    <div class="tile" onclick="launch('stremio')">🍿 Stremio</div>
+    <div class="tile" onclick="launch('plex')">🎬 Plex</div>
+    <div class="tile" onclick="launch('desktop')">🖥 Desktop</div>
+    <div class="tile" onclick="launch('shutdown')">🛑 Shutdown</div>
+    <div class="tile" onclick="launch('reboot')">🔁 Reboot</div>
+  </div>
+
+  <script>
+    function launch(action) {
+      fetch(`http://localhost:8099/launch/${action}`)
+        .catch(err => console.error('Error:', err));
+    }
+  </script>
+</body>
+</html>

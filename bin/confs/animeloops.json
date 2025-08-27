@@ -1,0 +1,9 @@
+{
+    "station_conf": {
+        "network_name": "AnimeLoops",
+        "network_type": "loop",
+        "channel_number": 10,
+        "network_long_name": "My AnimeLoops Channel",
+        "content_dir": "catalog/animeloops"
+    }
+}
