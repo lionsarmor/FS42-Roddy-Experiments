@@ -1,16 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
-# === Force custom OSD ===
-cp /ExternalDrive/projects/fs42-custom/bin/osd/main.py \
-   /ExternalDrive/projects/FieldStation42/fs42/osd/main.py
-echo "[OSD] Replaced official main.py with custom version"
-
-
 # === Paths ===
 FSROOT="/mnt/media01/projects/FieldStation42"
 LOGS="/mnt/media01/projects/fs42-custom/logs"
 mkdir -p "$LOGS"
+
+# === Force custom OSD ===
+cp -f /mnt/media01/projects/fs42-custom/bin/osd/main.py \
+      /mnt/media01/projects/FieldStation42/fs42/osd/main.py
+echo "[OSD] Replaced official main.py with custom version"
 
 # === Runtime env ===
 export DISPLAY=:99
@@ -22,18 +21,19 @@ echo "=== ALSA LOOPBACK SETUP FOR FIELD PLAYER ==="
 
 # === Cleanup old processes ===
 echo "[CLEANUP] stopping old processes…"
-pkill -f "Xvfb.*:99"             2>/dev/null || true
-pkill -f "python.*field_player"  2>/dev/null || true
+pkill -f "Xvfb.*:99"                2>/dev/null || true
+pkill -f "python.*field_player"     2>/dev/null || true
 pkill -f "python.*fs42/osd/main.py" 2>/dev/null || true
-pkill -f mpv                     2>/dev/null || true
-pkill -f ffmpeg                  2>/dev/null || true
-pkill -f pulseaudio              2>/dev/null || true
+pkill -f mpv                        2>/dev/null || true
+pkill -f ffmpeg                     2>/dev/null || true
+pkill -f pulseaudio                 2>/dev/null || true
 rm -f /tmp/.X99-lock /tmp/mpvsocket /tmp/test.wav || true
 sleep 1
 
 # === ALSA Loopback ===
 echo "[ALSA] loading snd-aloop (ok if already loaded)…"
-sudo modprobe snd-aloop 2>/dev/null || echo "[ALSA] snd-aloop already loaded?"
+/sbin/modprobe snd-aloop 2>/dev/null || echo "[ALSA] snd-aloop already loaded?"
+# ^^^ ONLY CHANGE: no sudo, so no password prompt
 
 ALSA_PLAYBACK="hw:Loopback,0,0"   # MPV plays here
 ALSA_CAPTURE="hw:Loopback,1,0"    # FFmpeg records from here
@@ -59,7 +59,6 @@ sleep 1
 
 # === FFmpeg capture (low-latency RTMP) ===
 echo "[FFMPEG] starting desktop capture → RTMP…"
-# shorter GOP = faster viewer re-syncs; small bufsize = less latency
 nohup ffmpeg \
   -fflags nobuffer \
   -flags low_delay \
