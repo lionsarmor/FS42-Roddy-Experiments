@@ -7,8 +7,8 @@ from pathlib import Path
 # --- config ---
 MPV_SOCKET = "/tmp/mpvsocket"
 SOURCES = [
-    Path("/mnt/media01/projects/FieldStation42/runtime/play_status.socket"),
-    Path("/mnt/media01/projects/FieldStation42/runtime/channel.socket"),
+    Path("/mnt/media01/projects/FS42-Tsar-Tools/FieldStation42/runtime/play_status.socket"),
+    Path("/mnt/media01/projects/FS42-Tsar-Tools/FieldStation42/runtime/channel.socket"),
 ]
 OSD_DURATION_MS = 3000
 OSD_LEVEL = 1

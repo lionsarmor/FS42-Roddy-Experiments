@@ -13,6 +13,8 @@ pkill -f "chromium"             2>/dev/null || true
 pkill -f "chromium-browser"     2>/dev/null || true
 pkill -f "mpv"                  2>/dev/null || true
 pkill -f "pulseaudio"           2>/dev/null || true
+pkill -f "uvicorn.*4242"        2>/dev/null || true
+
 
 # --- Remove stale sockets and lock files ---
 echo "Cleaning up temp files..."
