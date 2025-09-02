@@ -13,8 +13,9 @@ pkill -f "chromium"             2>/dev/null || true
 pkill -f "chromium-browser"     2>/dev/null || true
 pkill -f "mpv"                  2>/dev/null || true
 pkill -f "pulseaudio"           2>/dev/null || true
-pkill -f "uvicorn.*4242"        2>/dev/null || true
-
+pkill -f "uvicorn.*4242"        2>/dev/null || true   # FS42 API
+pkill -f "uvicorn.*4343"        2>/dev/null || true   # Tsar backend
+pkill -f "node.*5173"           2>/dev/null || true   # Frontend dev server (Vite)
 
 # --- Remove stale sockets and lock files ---
 echo "Cleaning up temp files..."

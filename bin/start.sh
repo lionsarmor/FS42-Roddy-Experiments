@@ -108,7 +108,6 @@ nohup ffmpeg \
   -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/mystream \
   >>"$LOGS/ffmpeg.log" 2>&1 &
 
-
 sleep 3
 
 # === Start FieldStation42 ===
@@ -125,6 +124,28 @@ echo "[OSD] waiting for mpv socket…"
 echo "[OSD] starting watcher: fs42/osd/main.py"
 nohup python3 "$FSROOT/fs42/osd/main.py" \
   >> "$LOGS/osd-forwarder.log" 2>&1 &
+
+# === MPV Watchdog ===
+echo "[WATCHDOG] starting mpv freeze monitor…"
+nohup bash -c '
+  LAST_POS=0
+  while true; do
+    sleep 10
+    CUR_POS=$(echo "{ \"command\": [\"get_property\", \"time-pos\"] }" | socat - /tmp/mpvsocket 2>/dev/null | jq -r .data 2>/dev/null || echo "err")
+    if [[ "$CUR_POS" == "null" || "$CUR_POS" == "err" ]]; then
+      echo "[WATCHDOG] mpv not responding, restarting…" >>"'"$LOGS"'/watchdog.log"
+      pkill -f "python.*field_player"
+      sleep 2
+      cd "'"$FSROOT"'" && nohup python3 field_player.py >>"'"$LOGS"'/fieldplayer.log" 2>&1 &
+    elif [[ "$CUR_POS" == "$LAST_POS" ]]; then
+      echo "[WATCHDOG] time-pos stuck at $CUR_POS, restarting mpv…" >>"'"$LOGS"'/watchdog.log"
+      pkill -f "python.*field_player"
+      sleep 2
+      cd "'"$FSROOT"'" && nohup python3 field_player.py >>"'"$LOGS"'/fieldplayer.log" 2>&1 &
+    fi
+    LAST_POS=$CUR_POS
+  done
+' >/dev/null 2>&1 &
 
 sleep 2
 
