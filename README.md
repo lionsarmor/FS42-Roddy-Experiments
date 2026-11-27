@@ -12,4 +12,6 @@ Archive of Roddy's earlier FieldStation42 forks, playback experiments, and tools
 
 Each archived branch or tag uses its original repository name as a prefix. The preserved commits include their original attribution and license files.
 
+The old FS42_Tools branches include an embedded `fs42-custom` Git reference. The referenced commits are preserved in [TSAR main](https://github.com/lionsarmor/FS42-Roddy-Experiments/tree/fs42-tsar-tools/main) and [TSAR AV](https://github.com/lionsarmor/FS42-Roddy-Experiments/tree/fs42-tsar-tools/AV).
+
 The RODDY Classic TV integration starts from a fresh upstream fork. Its planned Pi-to-Tang path retains FS42's library scanning, scheduling, channel lineup, and program metadata. The Pi decodes only the selected media and sends it to the FPGA, which owns the TV effects, OSD, and display output.
